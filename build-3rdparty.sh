@@ -1,15 +1,13 @@
 #!/bin/bash
 set -e
 
-if [ -z "$1" ]; then
-    echo "Error: INSTALL_DIR argument not provided"
-    echo "Usage: $0 <install_dir>"
+if [ -z "$KF6_INSTALL_DIR" ]; then
+    echo "Error: KF6_INSTALL_DIR environment variable not set"
     exit 1
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-INSTALL_DIR="$1"
-CMAKE_ARGS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_DIR}"
+CMAKE_ARGS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${KF6_INSTALL_DIR}"
 
 mkdir -p build-3rdparty
 cmake -S 3rdparty/KDDockWidgets/ -B build-3rdparty/KDDockWidgets ${CMAKE_ARGS} -DKDDockWidgets_FRONTENDS=qtwidgets
