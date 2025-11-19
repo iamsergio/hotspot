@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 
-if [ -z "$KF6_INSTALL_DIR" ]; then
-    echo "Error: KF6_INSTALL_DIR environment variable not set"
-    exit 1
+QT_INSTALL_PREFIX=$(qmake -query QT_INSTALL_PREFIX)
+
+if [ -z "$1" ]; then
+    INSTALL_PREFIX="$QT_INSTALL_PREFIX"
+else
+    INSTALL_PREFIX="$1"
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CMAKE_ARGS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${KF6_INSTALL_DIR}"
+CMAKE_ARGS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}"
 
 mkdir -p build-3rdparty
 cmake -S 3rdparty/KDDockWidgets/ -B build-3rdparty/KDDockWidgets ${CMAKE_ARGS} -DKDDockWidgets_FRONTENDS=qtwidgets
@@ -70,6 +73,11 @@ cmake -S 3rdparty/kwidgetsaddons/ -B build-3rdparty/kwidgetsaddons ${CMAKE_ARGS}
 cmake --build build-3rdparty/kwidgetsaddons
 cmake --install build-3rdparty/kwidgetsaddons
 
+
+cmake -S 3rdparty/kconfig/ -B build-3rdparty/kconfig ${CMAKE_ARGS}
+cmake --build build-3rdparty/kconfig
+cmake --install build-3rdparty/kconfig
+
 cmake -S 3rdparty/kdbusaddons/ -B build-3rdparty/kdbusaddons ${CMAKE_ARGS}
 cmake --build build-3rdparty/kdbusaddons
 cmake --install build-3rdparty/kdbusaddons
@@ -78,6 +86,10 @@ cmake -S 3rdparty/kcompletion/ -B build-3rdparty/kcompletion ${CMAKE_ARGS}
 cmake --build build-3rdparty/kcompletion
 cmake --install build-3rdparty/kcompletion
 
+cmake -S 3rdparty/knotifications/ -B build-3rdparty/knotifications ${CMAKE_ARGS}
+cmake --build build-3rdparty/knotifications
+cmake --install build-3rdparty/knotifications
+
 cmake -S 3rdparty/kjobwidgets/ -B build-3rdparty/kjobwidgets ${CMAKE_ARGS}
 cmake --build build-3rdparty/kjobwidgets
 cmake --install build-3rdparty/kjobwidgets
@@ -85,10 +97,6 @@ cmake --install build-3rdparty/kjobwidgets
 cmake -S 3rdparty/ki18n/ -B build-3rdparty/ki18n ${CMAKE_ARGS}
 cmake --build build-3rdparty/ki18n
 cmake --install build-3rdparty/ki18n
-
-cmake -S 3rdparty/kconfig/ -B build-3rdparty/kconfig ${CMAKE_ARGS}
-cmake --build build-3rdparty/kconfig
-cmake --install build-3rdparty/kconfig
 
 cmake -S 3rdparty/kauth/ -B build-3rdparty/kauth ${CMAKE_ARGS}
 cmake --build build-3rdparty/kauth
@@ -117,10 +125,6 @@ cmake --install build-3rdparty/kxmlgui
 cmake -S 3rdparty/kbookmarks/ -B build-3rdparty/kbookmarks ${CMAKE_ARGS}
 cmake --build build-3rdparty/kbookmarks
 cmake --install build-3rdparty/kbookmarks
-
-cmake -S 3rdparty/knotifications/ -B build-3rdparty/knotifications ${CMAKE_ARGS}
-cmake --build build-3rdparty/knotifications
-cmake --install build-3rdparty/knotifications
 
 cmake -S 3rdparty/kservice/ -B build-3rdparty/kservice ${CMAKE_ARGS}
 cmake --build build-3rdparty/kservice
