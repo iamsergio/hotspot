@@ -142,3 +142,8 @@ autoreconf -i -f
 ./configure --enable-maintainer-mode --enable-libdebuginfod --prefix=${INSTALL_PREFIX}
 make -j$(nproc)
 make install
+
+cd ${SCRIPT_DIR}/3rdparty/cpuburn
+qmake PREFIX=${INSTALL_PREFIX} CONFIG+=release
+make -j$(nproc)
+make install

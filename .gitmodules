@@ -101,3 +101,6 @@
 [submodule "3rdparty/elfutils"]
 	path = 3rdparty/elfutils
 	url = git://sourceware.org/git/elfutils.git
+[submodule "3rdparty/cpuburn"]
+	path = 3rdparty/cpuburn
+	url = https://github.com/iamsergio/cpuburn.git
