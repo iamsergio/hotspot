@@ -98,3 +98,6 @@
 [submodule "3rdparty/kauth"]
 	path = 3rdparty/kauth
 	url = https://invent.kde.org/frameworks/kauth.git
+[submodule "3rdparty/elfutils"]
+	path = 3rdparty/elfutils
+	url = git://sourceware.org/git/elfutils.git

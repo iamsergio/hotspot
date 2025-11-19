@@ -1,13 +1,12 @@
 #!/bin/bash
 set -e
 
-QT_INSTALL_PREFIX=$(qmake -query QT_INSTALL_PREFIX)
-
 if [ -z "$1" ]; then
-    INSTALL_PREFIX="$QT_INSTALL_PREFIX"
-else
-    INSTALL_PREFIX="$1"
+    echo "Error: INSTALL_PREFIX not set"
+    exit 1
 fi
+
+INSTALL_PREFIX="$1"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CMAKE_ARGS="-DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX}"
@@ -137,3 +136,9 @@ cmake --install build-3rdparty/kio
 cmake -S 3rdparty/kparts/ -B build-3rdparty/kparts ${CMAKE_ARGS}
 cmake --build build-3rdparty/kparts
 cmake --install build-3rdparty/kparts
+
+cd ${SCRIPT_DIR}/3rdparty/elfutils/
+autoreconf -i -f   
+./configure --enable-maintainer-mode --enable-libdebuginfod --prefix=${INSTALL_PREFIX}
+make -j$(nproc)
+make install
