@@ -64,15 +64,17 @@ cmake -S 3rdparty/kcodecs/ -B build-3rdparty/kcodecs ${CMAKE_ARGS}
 cmake --build build-3rdparty/kcodecs
 cmake --install build-3rdparty/kcodecs
 
-cmake -S 3rdparty/kguiaddons/ -B build-3rdparty/kguiaddons ${CMAKE_ARGS}
+echo "Building kguiaddons..."
+cmake -S 3rdparty/kguiaddons/ -B build-3rdparty/kguiaddons ${CMAKE_ARGS} -DBUILD_PYTHON_BINDINGS=OFF
 cmake --build build-3rdparty/kguiaddons
 cmake --install build-3rdparty/kguiaddons
 
+echo "Building kwidgetsaddons..."
 cmake -S 3rdparty/kwidgetsaddons/ -B build-3rdparty/kwidgetsaddons ${CMAKE_ARGS} -DBUILD_PYTHON_BINDINGS=OFF
 cmake --build build-3rdparty/kwidgetsaddons
 cmake --install build-3rdparty/kwidgetsaddons
 
-
+echo "Building kconfig..."
 cmake -S 3rdparty/kconfig/ -B build-3rdparty/kconfig ${CMAKE_ARGS}
 cmake --build build-3rdparty/kconfig
 cmake --install build-3rdparty/kconfig
@@ -85,11 +87,11 @@ cmake -S 3rdparty/kcompletion/ -B build-3rdparty/kcompletion ${CMAKE_ARGS}
 cmake --build build-3rdparty/kcompletion
 cmake --install build-3rdparty/kcompletion
 
-cmake -S 3rdparty/knotifications/ -B build-3rdparty/knotifications ${CMAKE_ARGS}
+cmake -S 3rdparty/knotifications/ -B build-3rdparty/knotifications ${CMAKE_ARGS} -DBUILD_PYTHON_BINDINGS=OFF
 cmake --build build-3rdparty/knotifications
 cmake --install build-3rdparty/knotifications
 
-cmake -S 3rdparty/kjobwidgets/ -B build-3rdparty/kjobwidgets ${CMAKE_ARGS}
+cmake -S 3rdparty/kjobwidgets/ -B build-3rdparty/kjobwidgets ${CMAKE_ARGS} -DBUILD_PYTHON_BINDINGS=OFF
 cmake --build build-3rdparty/kjobwidgets
 cmake --install build-3rdparty/kjobwidgets
 
@@ -117,7 +119,7 @@ cmake -S 3rdparty/kglobalaccel/ -B build-3rdparty/kglobalaccel ${CMAKE_ARGS}
 cmake --build build-3rdparty/kglobalaccel
 cmake --install build-3rdparty/kglobalaccel
 
-cmake -S 3rdparty/kxmlgui/ -B build-3rdparty/kxmlgui ${CMAKE_ARGS}
+cmake -S 3rdparty/kxmlgui/ -B build-3rdparty/kxmlgui ${CMAKE_ARGS} -DBUILD_PYTHON_BINDINGS=OFF
 cmake --build build-3rdparty/kxmlgui
 cmake --install build-3rdparty/kxmlgui
 
