@@ -1,0 +1,29 @@
+{
+  "name": "hotspot (ubuntu 26.04, vcpkg)",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "dev",
+  "containerEnv": {
+    "VCPKG_FORCE_SYSTEM_BINARIES": "1",
+    "VCPKG_DEFAULT_BINARY_CACHE": "/home/dev/.cache/vcpkg",
+    "CCACHE_DIR": "/home/dev/.cache/ccache"
+  },
+  "mounts": [
+    "source=hotspot-vcpkg-cache,target=/home/dev/.cache/vcpkg,type=volume",
+    "source=hotspot-ccache,target=/home/dev/.cache/ccache,type=volume"
+  ],
+  "postCreateCommand": "sudo chown -R dev:dev /home/dev/.cache",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "llvm-vs-code-extensions.vscode-clangd"
+      ],
+      "settings": {
+        "cmake.useCMakePresets": "always"
+      }
+    }
+  }
+}
